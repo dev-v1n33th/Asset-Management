@@ -87,7 +87,7 @@ function MobileAssetManagementScreen() {
     ]
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      {/* <DashboardNavbar /> */}
       <br />
       <MDBox borderRadius="lg" coloredShadow="info" py={0.01}>
         {/* <MDBox> */}

@@ -5,10 +5,11 @@ import * as Yup from "yup";
 import axios from "../../Uri";
 import { Container, Grid, InputLabel } from "@mui/material";
 import moment from "moment";
-import Gender from "layouts/profile/GuestLoginForm/components/Gender";
+// import Gender from "layouts/profile/GuestLoginForm/components/Gender";
 
 import { makeStyles } from "@mui/styles";
 import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
 import state from "layouts/profile/GuestLoginForm/components/State";
 
 import Textfield from "layouts/profile/GuestLoginForm/components/TextField";
@@ -51,7 +52,7 @@ const FORM_VALIDATION = Yup.object().shape({
 const notify = () => toast();
 
 const AddImageForm = (props) => {
-const settingImages = props.setAllImages
+    const settingImages = props.setAllImages
     const [File, setFile] = React.useState(null);
     const uploadImageHandler = (event) => {
         console.log(event.target.files[0]);
@@ -62,13 +63,19 @@ const settingImages = props.setAllImages
     const onSubmit = () => {
 
     }
+    const selectfields = {
+        "pdf": "PDF",
+        "word": "WORD",
+        "document": "DOCUMENT",
+        "img": "IMAGES"
+    }
 
     const [disableButtons, setDisableButtons] = React.useState(false);
     const [INITIAL_FORM_STATE, setINITIAL_FORM_STATE] = React.useState({
-            Name:"" ,
-            type:"",
-            description:"",
-            image:""
+        tag: "",
+        type: "",
+        description: "",
+        image: ""
 
 
 
@@ -110,26 +117,36 @@ const settingImages = props.setAllImages
                             initialValues={{ ...INITIAL_FORM_STATE }}
                             // validationSchema={FORM_VALIDATION}
                             onSubmit={async (guest, { resetForm }) => {
-console.log(guest);
-                                if (File !== null) {
-                                    const formData = new FormData();
-                                    formData.append("file", File);
-                                    formData.append("fileName", File.name);
-                                    const config = {
-                                        headers: {
-                                            "content-type": "multipart/form-data",
-                                        },
-                                    };
-                                    axios.post("guest/uploadimage", formData, config)
-                                        .then((res) => {
-                                            toast.success("Image was uploaded")
-                                            settingImages(res.data)
-                                        })
-                                        .catch((err) => toast.error("Network Error"))
-                                }
-                                else {
-                                    toast.error("Please select an Image")
-                                }
+                                console.log(guest);
+                                axios.post("/guest/uploadtag", guest)
+                                    .then((res) => {
+                                        if (res.data.id !== null) {
+                                            toast.success("tag was uploaded")
+                                            if (File !== null) {
+                                                const formData = new FormData();
+                                                formData.append("file", File);
+                                                formData.append("fileName", File.name);
+                                                const config = {
+                                                    headers: {
+                                                        "content-type": "multipart/form-data",
+                                                    },
+                                                };
+                                                axios.post(`guest/uploadimage/${res.data.id}`, formData, config)
+                                                    .then((response) => {
+                                                        toast.success("Image was uploaded")
+                                                        // settingImages(res.data)
+                                                    })
+                                                // .catch((err) => toast.error("Network Error"))
+                                            }
+                                            else {
+                                                toast.error("Please select an Image")
+                                            }
+
+                                        }
+
+                                    })
+
+
                                 // handleToggle();
 
 
@@ -143,20 +160,28 @@ console.log(guest);
                                 <Form>
                                     <Grid container spacing={2}>
                                         <Grid item xs={6}>
-                                            <h5> Name</h5>
+                                            <h5> Tag</h5>
                                             <Textfield
-                                                // inputProps={{ readOnly: true, }} 
-                                                name="Name" />
+
+                                                name="tag" />
 
 
                                         </Grid>
                                         <Grid item xs={6}>
                                             <h5>Type</h5>
-                                            <Textfield name="type" />
+                                            <Select
+                                                IconComponent={() => (
+                                                    <ArrowDropDownIcon className={classes.size} />
+                                                )}
+                                                name="type"
+                                                options={selectfields}
+                                                className={classes.root}
+                                            ></Select>
                                         </Grid>
+                                        {/* <Grid item xs={4}></Grid> */}
 
                                         <Grid item xs={6}>
-                                            <h5>Description</h5>
+                                            <h5>Asset Name</h5>
                                             <Textfield name="description" />
                                         </Grid>
                                         <Grid item xs={6}>
@@ -177,10 +202,23 @@ console.log(guest);
 
 
 
-                                        <Grid item xs={6} sx={{ marginTop: 2 }} >
+                                        <Grid item xs={2} sx={{ marginTop: 2 }} >
 
                                             <Button style={{ align: "center" }} disabled={disableButtons} onClick={() => { setDisableButtons(true) }}>Submit</Button>
 
+                                        </Grid>
+                                        <Grid item xs={2} style={{paddingTop:30}}>
+                                            <MDButton
+                                                width="20%"
+                                                variant="contained"
+                                                color="info"
+                                                size="medium"
+                                                justify="center"
+                                                // style={{ pad}}
+                                                onClick={props.closeAddImagePopUpHandler}
+                                            >
+                                                Close
+                                            </MDButton>
                                         </Grid>
                                     </Grid>
 

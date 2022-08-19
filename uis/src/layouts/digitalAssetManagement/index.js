@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-
+// import React, { useState, useEffect } from "react";
 import MDBox from "components/MDBox";
 // import Lin
 import { Link } from 'react-router-dom';
@@ -9,14 +9,32 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import MtTable from "layouts/MTTable/mtTable";
+import React, { useEffect, useState } from "react";
+
+//importing axios
+import axios from '../../Uri'
 // import InNotice from "./InNotice";
 //import Actions from "./components/Actions";
 //import TabPanel from "./components/Tab"
 
 
 function DigitalAssetManagementScreen() {
+
+const [digitalAssets , setDigitalAssets] = React.useState([]);
+  useEffect(async () => {
+    await axios.get("guest/getAllImages")
+        .then((res) => setDigitalAssets(res.data))
+}, [])
  const title = "Digital Assets"
     const coloumns=[
+      {
+        title: "TAG",
+        field: "tag",
+        headerStyle: {
+          backgroundColor: "#1E90FF",
+          color: "white",
+        },
+    },
         {
             title: "ASSET NAME",
             field: "assetName",
@@ -27,7 +45,7 @@ function DigitalAssetManagementScreen() {
         },
         {
             title: "TYPE",
-            field: "domain",
+            field: "type",
             headerStyle: {
               backgroundColor: "#1E90FF",
               color: "white",
@@ -36,7 +54,7 @@ function DigitalAssetManagementScreen() {
         
         {
             title: "OWNER",
-            field: "type",
+            field: "url",
             headerStyle: {
               backgroundColor: "#1E90FF",
               color: "white",
@@ -45,7 +63,7 @@ function DigitalAssetManagementScreen() {
         {
           title: "LOCATION",
           field: "url",
-          render: rowData => <Link to="/{rowData.url}">view</Link>,
+          // render: rowData => <Link to="/{rowData.url}">view</Link>,
           headerStyle: {
             backgroundColor: "#1E90FF",
             color: "white",
@@ -84,7 +102,7 @@ function DigitalAssetManagementScreen() {
         assetName:"IMAGE",
         domain:"JPG",
         type:"",
-        url:"https://stackoverflow.com/questions/40016202/reactjs-link-tag-uncaught-referenceerror-link-is-not-defined",
+        url:"",
         IpAddress:"07-07-2022",
         manufacture:"07-07-2022",
         model:"ROBERT",
@@ -139,14 +157,14 @@ function DigitalAssetManagementScreen() {
     ]
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      {/* <DashboardNavbar /> */}
       <br />
       <MDBox borderRadius="lg" coloredShadow="info" py={0.01}>
         {/* <MDBox> */}
           <Grid container spacing={0.5}>
             <MtTable 
                    coloumns={coloumns}  
-                   rows={rows}
+                   rows={digitalAssets}
                    title={title}
                    />
           </Grid>

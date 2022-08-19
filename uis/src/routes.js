@@ -93,30 +93,30 @@ const routes = [
 		route: '/mobileassetmanagement',
 		component:<MobileAssetManagementScreen />
 	},
-	{
-		type: 'collapse',
-		name: 'Panel for Admin',
-		key: 'adminPanel',
-		icon: <Icon fontSize="small">home</Icon>,
-		route: '/adminPanel',
-		component:<AdminPanelScreen />
-	},
-	{
-		type: 'collapse',
-		name: 'Departments',
-		key: 'departments',
-		icon: <Icon fontSize="small">home</Icon>,
-		route: '/departments',
-		component:<DepartmentsScreen />
-	},
-	{
-		type: 'collapse',
-		name: 'Vendors',
-		key: 'vendors',
-		icon: <Icon fontSize="small">home</Icon>,
-		route: '/vendors',
-		component:<VendorsScreen />
-	},
+	// {
+	// 	type: 'collapse',
+	// 	name: 'Panel for Admin',
+	// 	key: 'adminPanel',
+	// 	icon: <Icon fontSize="small">home</Icon>,
+	// 	route: '/adminPanel',
+	// 	component:<AdminPanelScreen />
+	// },
+	// {
+	// 	type: 'collapse',
+	// 	name: 'Departments',
+	// 	key: 'departments',
+	// 	icon: <Icon fontSize="small">home</Icon>,
+	// 	route: '/departments',
+	// 	component:<DepartmentsScreen />
+	// },
+	// {
+	// 	type: 'collapse',
+	// 	name: 'Vendors',
+	// 	key: 'vendors',
+	// 	icon: <Icon fontSize="small">home</Icon>,
+	// 	route: '/vendors',
+	// 	component:<VendorsScreen />
+	// },
 	{
 		type: 'collapse',
 		name: 'Users',
@@ -125,14 +125,14 @@ const routes = [
 		route: '/userManagement',
 		component:<UserManagementScreen />
 	},
-	{
-		type: 'collapse',
-		name: 'Reports',
-		key: 'reports',
-		icon: <ReceiptIcon />,
-		route: '/reports',
-		component:<ReportsScreen />
-	},
+	// {
+	// 	type: 'collapse',
+	// 	name: 'Reports',
+	// 	key: 'reports',
+	// 	icon: <ReceiptIcon />,
+	// 	route: '/reports',
+	// 	component:<ReportsScreen />
+	// },
 	{
 		type: 'collapse',
 		name: 'Image Assets',

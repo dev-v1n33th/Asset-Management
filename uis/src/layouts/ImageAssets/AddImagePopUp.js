@@ -62,26 +62,17 @@ export default function AddImagePopUp({open ,closeAddImagePopUpHandler ,...props
           <DialogContent>
          
            
-           <AddImageForm setAllImages={props.setAllImages}/>
+           <AddImageForm 
+                        setAllImages={props.setAllImages}
+                        closeAddImagePopUpHandler={closeAddImagePopUpHandler}
+                        />
 
             
            
           </DialogContent>
           <DialogActions>
             <Grid container style={{ display: "flex" }}>
-              <Grid item xs={6}>
-                <MDButton
-                  width="20%"
-                  variant="contained"
-                  color="info"
-                  size="large"
-                  justify="center"
-                  style={{ borderRadius: 10 }}
-                  onClick={closeAddImagePopUpHandler}
-                >
-                  Close
-                </MDButton>
-              </Grid>
+             
             </Grid>
           </DialogActions>
         </Dialog>
