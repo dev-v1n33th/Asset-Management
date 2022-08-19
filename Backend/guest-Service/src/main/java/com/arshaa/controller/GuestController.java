@@ -339,11 +339,11 @@ public class GuestController {
 		}
 	}
 	
-	@PostMapping("/uploadimage")
-	public ResponseEntity uploadImage(@RequestParam("file") MultipartFile imagefile){
+	@PostMapping("/uploadimage/{id}")
+	public ResponseEntity uploadImage(@PathVariable int id ,@RequestParam("file") MultipartFile imagefile){
 		String message = "";
 		try {
-			List<ImageAssets>getImages= imgServ.storeImages(imagefile);
+			List<ImageAssets>getImages= imgServ.storeImages(imagefile ,id);
 			message = "uploaded the image successfully ";
 					return new ResponseEntity(getImages,HttpStatus.OK);
 		}
@@ -351,6 +351,22 @@ public class GuestController {
 			message = "unable to upload the image";
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
 		}
+	}
+	@PostMapping("/uploadtag")
+	public ResponseEntity uploadtag(@RequestBody ImageAssets tag) {
+		String message = "";
+		try {
+			//imgServ.storeTag(tag);
+			message= "uploading the tag was successfull";
+			return new ResponseEntity(imgServ.storeTag(tag),HttpStatus.OK);
+		}
+		
+		 catch (Exception e) {
+				message = "Can't able to upload tag" ;
+				return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
+			}
+		
+		
 	}
 private ResponseEntity ResponseEntity(List<ImageAssets> getImages, HttpStatus ok) {
 		// TODO Auto-generated method stub

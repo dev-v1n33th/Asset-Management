@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gatewayService
+    name: gateway-poc
   cloud:
     gateway:
       routes:

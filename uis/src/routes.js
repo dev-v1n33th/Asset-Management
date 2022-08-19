@@ -133,14 +133,14 @@ const routes = [
 	// 	route: '/reports',
 	// 	component:<ReportsScreen />
 	// },
-	{
-		type: 'collapse',
-		name: 'Image Assets',
-		key: 'imageAssets',
-		icon: <PhotoSizeSelectActualIcon />,
-		route: '/imageAssets',
-		component:<ImageAssetsScreen />
-	},
+	// {
+	// 	type: 'collapse',
+	// 	name: 'Image Assets',
+	// 	key: 'imageAssets',
+	// 	icon: <PhotoSizeSelectActualIcon />,
+	// 	route: '/imageAssets',
+	// 	component:<ImageAssetsScreen />
+	// },
 	// {
 	// 	type: 'collapse',
 	// 	name: 'Guest Onboarding',
